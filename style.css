@@ -1,0 +1,125 @@
+body {
+    font-family: 'Anton', sans serif;
+}
+
+:root {
+    --color-yellow : #FFD15B;
+    --color-black: #1B1B1B;
+    --color-grey: #7A7A7A;
+    --color-bg: #ededed;
+}
+
+.container-header {
+    background-image: url(background.jpg);
+    height: 660px;
+}
+
+.container-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10em;
+}
+
+.title-elmt {
+    color: var(--color-yellow);
+    padding: 0 10em 0 10em;
+    line-height: 1.5em;
+}
+
+.container-search {
+    margin-top: 20px;
+}
+
+.search-elmt {
+    width: 900px;
+    height: 50px;
+    border-radius: 11px;
+    border: none;
+    font-family: 'Manrope', sans serif;
+    color: var(--color-grey);
+    padding: 20px;
+}
+
+.main {
+    padding: 40px;
+    background-color: var(--color-bg);
+}
+
+.container-main {
+    display: flex;
+}
+
+.container-filter {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.dropdown-toggle {
+    font-family: 'Manrope', sans serif;
+    border: none;
+    background-color: #FFFFFF;
+    padding: 17px 16px 17px 16px;
+}
+
+.container-main-title {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.container-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 3em;
+}
+
+.card {
+    width: 380px;
+    height: 730px;
+    border-radius: 21px;
+}
+
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 21px 21px 0 0;
+}
+
+.card-subtitle {
+    margin-top: 2em;
+    font-family: 'Manrope', sans serif;
+    text-transform: uppercase;
+    color: var(--color-grey);
+}
+
+.card-text {
+    font-family: 'Manrope', sans serif;
+}
+
+.list-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.list-group-item {
+    padding: 0;
+    border: none;
+    font-family: 'Manrope', sans serif;
+}
+
+.card-tag {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    border-radius: 14px;
+    background-color: var(--color-yellow);
+    padding: 5px 15px 5px 15px;
+    font-family: 'Manrope', sans serif;
+    font-size: 12px;
+    text-align: center;
+    width: 65px;
+}

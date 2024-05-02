@@ -7,11 +7,17 @@ body {
     --color-black: #1B1B1B;
     --color-grey: #7A7A7A;
     --color-bg: #ededed;
+    --bs-btn-hover-border-color: white;
 }
 
 .container-header {
     background-image: url(background.jpg);
     height: 660px;
+}
+.logo {
+    width: 15%;
+    margin-top: 3em;
+    margin-left: 4em;
 }
 
 .container-title {
@@ -40,6 +46,21 @@ body {
     padding: 20px;
 }
 
+.btn-search {
+    position: absolute;
+    background-color: #1B1B1B;
+    width: 37px;
+    height: 35px;
+    right: 281px;
+    bottom: 162px;
+    border-radius: 6px;
+    border: none;
+}
+
+.fa-magnifying-glass {
+    color: #FFFFFF;
+}
+
 .main {
     padding: 40px;
     background-color: var(--color-bg);
@@ -50,9 +71,8 @@ body {
 }
 
 .container-filter {
-    display: flex;
-    justify-content: space-around;
-    flex: 1;
+   width: 200px;
+   background-color: #FFFFFF;
 }
 
 .dropdown-toggle {
@@ -60,6 +80,31 @@ body {
     border: none;
     background-color: #FFFFFF;
     padding: 17px 16px 17px 16px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#drop-menu{
+    top: -6px !important;
+    width: 200px;
+    border: none;
+}
+
+.search-item {
+    border: 1px #C6C6C6 solid;
+}
+
+.search-item-icon {
+    color: #C6C6C6;
+}
+
+.btn-search-item {
+    position: absolute;
+    right: 20px;
+    background: none;
+    border: none;
 }
 
 .container-main-title {

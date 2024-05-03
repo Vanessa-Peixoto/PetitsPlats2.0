@@ -1,6 +1,8 @@
 
-function showRecipes() {
+function showRecipes(recipes) {
     const recipesCardSection = document.querySelector('.container-card');
+
+    recipesCardSection.innerHTML = '';
 
     recipes.forEach((recipe) => {
         const recipesModel = recipesTemplate(recipe);
@@ -59,7 +61,7 @@ function recipesTemplate(data) {
             newIngredient.classList.add('list-group-item');
 
             let newIngredientQuantity = null;
-            
+
             if (ingredient.quantity || ingredient.unit) {
 
                 newIngredientQuantity = document.createElement('li');
@@ -103,25 +105,33 @@ function recipesTemplate(data) {
     return { id, name, picture, ingredients, description, time, createCardRecipe }
 }
 
+function displayTotalRecipes(recipes) {
+    let totalRecipes = document.querySelector('.container-main-title h6');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function init() {
-    showRecipes();
+    totalRecipes.innerHTML = recipes.length + ' recettes';
 }
 
-init()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function init() {
+        showRecipes(recipes);
+        displayTotalRecipes(recipes);
+    }
+
+    init()

@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/60083713a2.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap"
+        rel="stylesheet">
     <title>Les petits plats</title>
 </head>
+
 <body>
     <header class="container-header">
         <div>
@@ -24,7 +30,8 @@
         <div class="container-title">
             <h1 class="title-elmt">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
             <form action="" class="container-search">
-                <input type="text" name="" id="" class="search-elmt" placeholder="Rechercher une recette, un ingrédient, ...">
+                <input type="text" name="" id="main-search" class="search-elmt"
+                    placeholder="Rechercher une recette, un ingrédient, ...">
                 <button class="btn-search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -33,16 +40,14 @@
     </header>
 
     <main class="main">
-        <div class="container-main">
+        <section class="container-main">
 
-
-
-            
             <div class="container-filter">
-                
+
 
                 <div class="dropdown">
-                    <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         Appareils
                     </button>
                     <ul id="drop-menu" class="dropdown-menu">
@@ -56,105 +61,24 @@
                         <li class="dropdown-item">Tata</li>
                     </ul>
                 </div>
-
-                
             </div>
+
+
 
             <div class="container-main-title">
                 <h6>1500 recettes</h6>
             </div>
-        </div>
-
-        <section class="container-card">
-
-            <div class="card">
-                <img src="images/Recette01.jpg" class="card-img-top" alt="...">
-                <span class="card-tag">10min</span>
-
-                <div class="card-body"> 
-
-                  <h5 class="card-title">Titre recette</h5>
-                  <h6 class="card-subtitle mb-2">Recette</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <h6 class="card-subtitle mb-2">Ingrédients</h6>
-                  <ul class="list-group list-group-flush">
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">400ml</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-                    
-                
-                  </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="images/Recette01.jpg" class="card-img-top" alt="...">
-                <span class="card-tag">10min</span>
-
-                <div class="card-body">
-
-                  <h5 class="card-title">Titre recette</h5>
-                  <h6 class="card-subtitle mb-2">Recette</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <h6 class="card-subtitle mb-2">Ingrédients</h6>
-                  <ul class="list-group list-group-flush">
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">400ml</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-
-                    <div>
-                        <li class="list-group-item">Lait de coco</li>
-                        <li class="list-group-item">An item</li>
-                    </div>
-                    
-                
-                  </ul>
-                </div>
-            </div>
         </section>
+
+        <section class="container-card"></section>
 
 
     </main>
 
     <script src="recipes.js"></script>
     <script src="scripts/index.js"></script>
-    
+    <script src="scripts/filter.js"></script>
+
 </body>
+
 </html>

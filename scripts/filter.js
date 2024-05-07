@@ -1,18 +1,20 @@
-
+/**
+ * @description Get recipes matching the search value
+ * @param {string} searchValue 
+ * @returns {Array<Object>}
+ */
 function getRecipes(searchValue) {
-
-    //je créer un nouveau tableau qui va contenir mes recettes trié
+    //create new array which contains recipes
     let newRecipesArray = [];
-    //je boucle sur mon objet recette
+    //loop the recipes object
     for (recipe of recipes) {
-        //je regarde si la valeur est en partie présente dans le titre
+        //compare the search value with the recipes
         if (recipe.name.includes(searchValue) || recipe.description.includes(searchValue)) {
-            //je met la recette dans le nouveau tableau
+            //add new recipe
             newRecipesArray.push(recipe);
             continue;
         }
-
-        //je check pour les ingrédients
+        //compare the ingredients of recipes
         for (ingredient of recipe.ingredients) {
             if (ingredient.ingredient.includes(searchValue)) {
                 newRecipesArray.push(recipe);
@@ -20,37 +22,40 @@ function getRecipes(searchValue) {
             }
         }
     }
-    console.log(newRecipesArray);
     return newRecipesArray;
 }
-
+/**
+ * @description Show the recipes in the section
+ * @param {Array<Object>} recipes 
+ * @param {string} searchValue 
+ */
 function displayRecipes(recipes, searchValue) {
-    if(recipes.length === 0) {
+    //if the recipe don't exist
+    if (recipes.length === 0) {
         let message = document.createElement('p');
         message.textContent = 'Aucune recette ne contient ' + searchValue + ' vous pouvez chercher "tarte aux pommes", "poisson", ect';
 
         let container = document.querySelector('.container-card');
         container.innerHTML = '';
         container.appendChild(message);
+    } else {
+       showRecipes(recipes);
     }
-
-    showRecipes(recipes);
-    displayTotalRecipes(recipes);
+    displayTotalRecipes(recipes); 
 }
 
-function init(e) {
+/**
+ * @description Function called when a user enters a value in the search bar
+ * @param {Event} e 
+ */
+function initSearch(e) {
     let searchValue = e.target.value;
     if (searchValue.length > 3) {
         let filteredRecipes = getRecipes(searchValue);
         displayRecipes(filteredRecipes, searchValue);
+        
     }
 }
 
-
-
-
-
 const searchInput = document.getElementById('main-search');
-searchInput.addEventListener('change', init);
-
-
+searchInput.addEventListener('change', initSearch);

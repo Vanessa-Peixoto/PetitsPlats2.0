@@ -1,23 +1,15 @@
-
-function showRecipes(recipes) {
-    const recipesCardSection = document.querySelector('.container-card');
-
-    recipesCardSection.innerHTML = '';
-
-    recipes.forEach((recipe) => {
-        const recipesModel = recipesTemplate(recipe);
-        const recipesCard = recipesModel.createCardRecipe();
-
-        recipesCardSection.appendChild(recipesCard);
-    })
-}
-
+/**
+ * @description Create card recipe based on data
+ * @param {Object} data 
+ * @returns {Object}
+ */
 function recipesTemplate(data) {
+
     const { id, image, name, ingredients, time, description } = data;
     const picture = `images/${image}`;
 
     function createCardRecipe() {
-
+        //create article
         const card = document.createElement('article');
         card.classList.add('card');
 
@@ -53,9 +45,7 @@ function recipesTemplate(data) {
         listIngredientElmt.classList.add('list-group', 'list-group-flush');
 
         ingredients.forEach((ingredient) => {
-
             let containerListIngredient = document.createElement('ul');
-
             let newIngredient = document.createElement('li');
             newIngredient.textContent = ingredient.ingredient;
             newIngredient.classList.add('list-group-item');
@@ -63,8 +53,8 @@ function recipesTemplate(data) {
             let newIngredientQuantity = null;
 
             if (ingredient.quantity || ingredient.unit) {
-
                 newIngredientQuantity = document.createElement('li');
+
                 if (ingredient.quantity) {
                     newIngredientQuantity.textContent = ingredient.quantity;
                 }
@@ -72,20 +62,14 @@ function recipesTemplate(data) {
                     newIngredientQuantity.textContent += ingredient.unit;
                 }
                 newIngredientQuantity.classList.add('list-group-item');
-
             }
-
 
             containerListIngredient.appendChild(newIngredient);
             if (newIngredientQuantity) {
                 containerListIngredient.appendChild(newIngredientQuantity);
             }
-
             listIngredientElmt.appendChild(containerListIngredient);
         })
-
-
-
 
         card.appendChild(imgElmt);
         card.appendChild(timerElmt);
@@ -98,40 +82,7 @@ function recipesTemplate(data) {
 
         card.appendChild(bodyCard);
 
-
         return card;
     }
-
     return { id, name, picture, ingredients, description, time, createCardRecipe }
 }
-
-function displayTotalRecipes(recipes) {
-    let totalRecipes = document.querySelector('.container-main-title h6');
-
-    totalRecipes.innerHTML = recipes.length + ' recettes';
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function init() {
-        showRecipes(recipes);
-        displayTotalRecipes(recipes);
-    }
-
-    init()

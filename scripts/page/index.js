@@ -30,8 +30,10 @@ function init() {
     showRecipes(recipes);
     displayTotalRecipes(recipes);
     displayApplianceList(recipes);
-    displayUstensilsList(recipes);
-    displayIngredientsList(recipes)
+    const ustensils = normalizeUstensils(recipes);
+    displayUstensilsList(ustensils);
+    const ingredients = normalizeIngredients(recipes);
+    displayIngredientsList(ingredients)
 }
 
 init()

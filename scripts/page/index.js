@@ -29,7 +29,7 @@ function displayTotalRecipes(recipes) {
 function init() {
     showRecipes(recipes);
     displayTotalRecipes(recipes);
-    displayApplianceList(recipes);
+    displayApplianceList(normalizeAppliances(recipes));
     const ustensils = normalizeUstensils(recipes);
     displayUstensilsList(ustensils);
     const ingredients = normalizeIngredients(recipes);

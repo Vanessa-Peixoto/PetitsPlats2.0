@@ -25,11 +25,11 @@ function displayApplianceList(appliances) {
 
             let value = e.target.innerText;
             //afficher celle ci dans un p
-            let pElement = document.createElement('p');
+            let pElement = document.querySelector('.tag');
             pElement.textContent = value;
             //et le faire apparaitre en dessous des btn de filtrage
-            let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(pElement);
+            //let containerElement = document.querySelector('.tag-element');
+            //containerElement.appendChild(pElement);
 
             tags.appliances.add(value);
 
@@ -40,21 +40,14 @@ function displayApplianceList(appliances) {
             displayTotalRecipes(recipeWithAppliance);
 
             const ingredients = normalizeIngredients(recipeWithAppliance);
-            displayIngredientsList(ingredients);
+            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
 
             const ustensils = normalizeUstensils(recipeWithAppliance);
-            displayUstensilsList(ustensils);
+            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
 
             const appliances = normalizeAppliances(recipeWithAppliance);
-            displayApplianceList(appliances);
-
-
-
-
+            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
         })
-
-
-
     }
 }
 
@@ -123,13 +116,13 @@ function displayUstensilsList(ustensils) {
             displayTotalRecipes(recipeWithUstensil);
 
             const ingredients = normalizeIngredients(recipeWithUstensil);
-            displayIngredientsList(ingredients);
+            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
 
             const ustensils = normalizeUstensils(recipeWithUstensil);
-            displayUstensilsList(ustensils);
+            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
 
             const appliances = normalizeAppliances(recipeWithUstensil);
-            displayApplianceList(appliances);
+            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
         })
     }
 }
@@ -151,14 +144,28 @@ function displayIngredientsList(ingredients) {
 
         newIngredientElmt.addEventListener('click', (e) => {
             let value = e.target.innerText;
-            //afficher celle ci dans un p
+
+
+            let div = document.createElement('div');
+            div.classList.add('tag-ingredient');
+
             let pElement = document.createElement('p');
             pElement.textContent = value;
-            //et le faire apparaitre en dessous des btn de filtrage
+
+            let btn = document.createElement('button');
+            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
+
+            div.appendChild(pElement);
+            div.appendChild(btn);
+
             let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(pElement);
+            containerElement.appendChild(div);
+
+            btn.addEventListener('click', closeTag);
 
             tags.ingredients.add(value);
+
+            filteredRecipes = recipes;
 
             getIngredient();
             getAppliance();
@@ -171,15 +178,13 @@ function displayIngredientsList(ingredients) {
             //je récupere la liste des ingredients
             //des appareils et ustensiles
             const ingredients = normalizeIngredients(filteredRecipes);
-            displayIngredientsList(ingredients);
+            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
 
             const ustensils = normalizeUstensils(filteredRecipes);
-            displayUstensilsList(ustensils);
+            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
 
             const appliances = normalizeAppliances(filteredRecipes);
-            displayApplianceList(appliances);
-
-
+            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
         })
     }
 }
@@ -219,81 +224,6 @@ function filterAdvencedWithValue() {
 filterAdvencedWithValue();
 
 
-function displayTag() {
-
-    //function qui permet de faire apparaitre le tag
-    //il faut qu'on puisse ecouter l'evenement au click sur l'item
-    const itemElmt = document.querySelectorAll('.item-appliance, .item-ingredient, .item-ustensil');
-    for (let item of itemElmt) {
-        item.addEventListener('click', (e) => {
-            // dès qu'on clique sur l'item
-            //il faut récupérer la valeur
-            let value = e.target.innerText;
-            console.log(value);
-            //afficher celle ci dans un p
-            let pElement = document.createElement('p');
-            pElement.textContent = value;
-            //et le faire apparaitre en dessous des btn de filtrage
-            let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(pElement);
-            // ensuite mettre à jours la liste de recette
-            //faut parcourir recipes pour ensuite comparer la valeur du tag avec les recettes et afficher
-            // filtre sur recipes en créant un nouveau tableau
-            // Afficher les recettes du nouveau tableau
-
-            let currentClass = e.target.className;
-
-            if (currentClass.includes('item-appliance')) {
-                const recipeWithAppliance = getAppliance(value);
-                showRecipes(recipeWithAppliance);
-                displayTotalRecipes(recipeWithAppliance);
-
-                const ingredients = normalizeIngredients(recipeWithAppliance);
-                displayIngredientsList(ingredients);
-
-                const ustensils = normalizeUstensils(recipeWithAppliance);
-                displayUstensilsList(ustensils);
-
-                const appliances = normalizeAppliances(recipeWithAppliance);
-                displayApplianceList(appliances);
-
-            } else if (currentClass.includes('item-ustensil')) {
-                const recipeWithUstensil = getUstensil(value);
-                showRecipes(recipeWithUstensil);
-                displayTotalRecipes(recipeWithUstensil);
-
-                const ingredients = normalizeIngredients(recipeWithUstensil);
-                displayIngredientsList(ingredients);
-
-                const ustensils = normalizeUstensils(recipeWithUstensil);
-                displayUstensilsList(ustensils);
-
-                const appliances = normalizeAppliances(recipeWithUstensil);
-                displayApplianceList(appliances);
-
-            } else {
-                const recipeWithIngredient = getIngredient(value);
-                showRecipes(recipeWithIngredient);
-                displayTotalRecipes(recipeWithIngredient);
-
-                //je pars des recettes stocké dans mon tableau
-                //je récupere la liste des ingredients
-                //des appareils et ustensiles
-                const ingredients = normalizeIngredients(recipeWithIngredient);
-                displayIngredientsList(ingredients);
-
-                const ustensils = normalizeUstensils(recipeWithIngredient);
-                displayUstensilsList(ustensils);
-
-                const appliances = normalizeAppliances(recipeWithIngredient);
-                displayApplianceList(appliances);
-            }
-
-        })
-    }
-
-}
-
 function getAppliance() {
     if (Array.from(tags.appliances).length === 0) {
         return filteredRecipes;
@@ -318,13 +248,19 @@ function getIngredient() {
 
     let newIngredientArray = [];
     for (recipe of filteredRecipes) {
-        for (ingredient of recipe.ingredients) {
-            if (Array.from(tags.ingredients).includes(ingredient.ingredient.toLowerCase())) {
-                newIngredientArray.push(recipe);
+        let canBeAdded = true;
+        for (let tag of Array.from(tags.ingredients)) {
+            let ingredients = normalizeIngredients([recipe]);
+
+            if (!ingredients.includes(tag)) {
+                canBeAdded = false;
             }
         }
-    }
 
+        if (canBeAdded) {
+            newIngredientArray.push(recipe);
+        }
+    }
     filteredRecipes = newIngredientArray;
 
     return newIngredientArray;
@@ -337,14 +273,71 @@ function getUstensil() {
 
     let newUstensilArray = [];
     for (recipe of filteredRecipes) {
-        for (ustensil of recipe.ustensils) {
-            if (Array.from(tags.ustensils).includes(ustensil.toLowerCase())) {
-                newUstensilArray.push(recipe);
+        let canBeAdded = true;
+        for (tag of Array.from(tags.ustensils)) {
+            let ustensils = normalizeUstensils([recipe]);
+            if (!ustensils.includes(tag)) {
+                canBeAdded = false;
             }
         }
-    }
 
+        if (canBeAdded) {
+            newUstensilArray.push(recipe);
+        }
+    }
     filteredRecipes = newUstensilArray;
 
     return newUstensilArray;
 }
+
+function closeTag(e) {
+    // A partir de l'element button je récupère le texte de mon tag (lait de coco)
+    const buttonElement = e.target;
+    let pElement = buttonElement.previousElementSibling;
+
+    let tag = pElement.textContent;
+    console.log(tag);
+
+
+    // Récupérer l'element parent et vérifier que c'est un tag ingrédient
+    // Si oui :
+    const containerTag = buttonElement.closest('div');
+
+    // Data handling
+    switch (containerTag.className) {
+        case 'tag-ingredient':
+            tags.ingredients.delete(tag);
+            break;
+        case 'tag-appliance':
+            tags.appliances.delete(tag);
+            break;
+        case 'tag-ustensil':
+            tags.ustensils.delete(tag);
+            break;
+    }
+
+    containerTag.remove();
+
+    filteredRecipes = recipes;
+
+    getIngredient();
+    getAppliance();
+    getUstensil();
+
+    showRecipes(filteredRecipes);
+    displayTotalRecipes(filteredRecipes);
+
+    //je pars des recettes stocké dans mon tableau
+    //je récupere la liste des ingredients
+    //des appareils et ustensiles
+    const ingredients = normalizeIngredients(filteredRecipes);
+    displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
+
+    const ustensils = normalizeUstensils(filteredRecipes);
+    displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
+
+    const appliances = normalizeAppliances(filteredRecipes);
+    displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
+}
+
+

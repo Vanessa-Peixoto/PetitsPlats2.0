@@ -8,11 +8,7 @@ let filteredRecipes = recipes;
 
 function displayApplianceList(appliances) {
     const containerListAppliance = document.querySelector('.appliance');
-
-    let applianceElemt = document.querySelectorAll('.appliance .item-appliance');
-    for (elmt of applianceElemt) {
-        elmt.remove();
-    }
+    clearList(containerListAppliance, '.item-appliance');
 
     for (let appliance of appliances) {
         let newApplianceElmt = document.createElement('li');
@@ -25,27 +21,44 @@ function displayApplianceList(appliances) {
 
             let value = e.target.innerText;
             //afficher celle ci dans un p
-            let pElement = document.querySelector('.tag');
+            let div = document.createElement('div');
+            div.classList.add('tag-appliance');
+
+            let pElement = document.createElement('p');
             pElement.textContent = value;
-            //et le faire apparaitre en dessous des btn de filtrage
-            //let containerElement = document.querySelector('.tag-element');
-            //containerElement.appendChild(pElement);
+
+            let btn = document.createElement('button');
+            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
+
+            div.appendChild(pElement);
+            div.appendChild(btn);
+
+            let containerElement = document.querySelector('.container-tag');
+            containerElement.appendChild(div);
+
+            btn.addEventListener('click', closeTag);
 
             tags.appliances.add(value);
 
-            const recipeWithAppliance = getAppliance();
+
+            filteredRecipes = recipes;
+
+            getIngredient();
+            getAppliance();
+            getUstensil();
+
+            showRecipes(filteredRecipes);
+            displayTotalRecipes(filteredRecipes);
 
 
-            showRecipes(recipeWithAppliance);
-            displayTotalRecipes(recipeWithAppliance);
 
-            const ingredients = normalizeIngredients(recipeWithAppliance);
+            const ingredients = normalizeIngredients(filteredRecipes);
             displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
 
-            const ustensils = normalizeUstensils(recipeWithAppliance);
+            const ustensils = normalizeUstensils(filteredRecipes);
             displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
 
-            const appliances = normalizeAppliances(recipeWithAppliance);
+            const appliances = normalizeAppliances(filteredRecipes);
             displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
         })
     }
@@ -87,11 +100,7 @@ function normalizeIngredients(recipes, value = "") {
 
 function displayUstensilsList(ustensils) {
     const containerListUstensils = document.querySelector('.ustensils');
-
-    let ustensilElemt = document.querySelectorAll('.ustensils .item-ustensil');
-    for (elmt of ustensilElemt) {
-        elmt.remove();
-    }
+    clearList(containerListUstensils, '.item-ustensil');
 
     for (ustensil of ustensils) {
 
@@ -101,27 +110,44 @@ function displayUstensilsList(ustensils) {
         containerListUstensils.appendChild(newUstensilElmt);
 
         newUstensilElmt.addEventListener('click', (e) => {
+
             let value = e.target.innerText;
-            //afficher celle ci dans un p
+
+            let div = document.createElement('div');
+            div.classList.add('tag-ustensil');
+
             let pElement = document.createElement('p');
             pElement.textContent = value;
-            //et le faire apparaitre en dessous des btn de filtrage
+
+            let btn = document.createElement('button');
+            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
+
+            div.appendChild(pElement);
+            div.appendChild(btn);
+
             let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(pElement);
+            containerElement.appendChild(div);
+
+            btn.addEventListener('click', closeTag);
 
             tags.ustensils.add(value);
 
-            const recipeWithUstensil = getUstensil();
-            showRecipes(recipeWithUstensil);
-            displayTotalRecipes(recipeWithUstensil);
+            filteredRecipes = recipes;
 
-            const ingredients = normalizeIngredients(recipeWithUstensil);
+            getIngredient();
+            getAppliance();
+            getUstensil();
+
+            showRecipes(filteredRecipes);
+            displayTotalRecipes(filteredRecipes);
+
+            const ingredients = normalizeIngredients(filteredRecipes);
             displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
 
-            const ustensils = normalizeUstensils(recipeWithUstensil);
+            const ustensils = normalizeUstensils(filteredRecipes);
             displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
 
-            const appliances = normalizeAppliances(recipeWithUstensil);
+            const appliances = normalizeAppliances(filteredRecipes);
             displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
         })
     }
@@ -318,7 +344,8 @@ function closeTag(e) {
 
     containerTag.remove();
 
-    filteredRecipes = recipes;
+    const searchValue = document.getElementById('main-search');
+    filteredRecipes = getRecipes(searchValue.value);
 
     getIngredient();
     getAppliance();
@@ -338,6 +365,15 @@ function closeTag(e) {
 
     const appliances = normalizeAppliances(filteredRecipes);
     displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
+}
+
+
+
+function clearList(container, item) {
+    let elements = container.querySelectorAll(item);
+    for (let elmt of elements) {
+        elmt.remove();
+    }
 }
 
 

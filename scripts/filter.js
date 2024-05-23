@@ -1,3 +1,4 @@
+
 /**
  * @description Get recipes matching the search value
  * @param {string} searchValue 
@@ -53,9 +54,14 @@ function initSearch(e) {
     if (searchValue.length > 3) {
         let filteredRecipes = getRecipes(searchValue);
         displayRecipes(filteredRecipes, searchValue);
-        
+        displayApplianceList(normalizeAppliances(filteredRecipes));
+        displayIngredientsList(normalizeIngredients(filteredRecipes));
+        displayUstensilsList(normalizeUstensils(filteredRecipes));
+    }
+    else if(searchValue.length === 0) {
+        displayRecipes(recipes)
     }
 }
 
 const searchInput = document.getElementById('main-search');
-searchInput.addEventListener('change', initSearch);
+searchInput.addEventListener('input', initSearch);

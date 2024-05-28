@@ -8,6 +8,8 @@ body {
     --color-grey: #7A7A7A;
     --color-bg: #ededed;
     --bs-btn-hover-border-color: white;
+    --font-primary: 'Anton', sans serif;
+    --font-secondary: 'Manrope', sans serif;
 }
 
 .container-header {
@@ -70,6 +72,7 @@ body {
 
 .container-main {
     display: flex;
+    margin-bottom: 20px;
 }
 
 .container-filter {
@@ -171,4 +174,27 @@ body {
     font-size: 12px;
     text-align: center;
     width: 65px;
+}
+
+.tag-ingredient {
+    position: relative;
+    background-color: var(--color-yellow);
+    font-family: var(--font-secondary);
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.close-tag {
+    position: absolute;
+    top: 12px;
+    right: 7px;
+    border: none;
+    background-color: var(--color-yellow);
+    font-size: 20px;
+}
+
+.tag-ingredient p {
+    padding: 10px 0px 10px 10px;
+    text-transform: capitalize;
 }

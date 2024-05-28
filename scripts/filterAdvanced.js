@@ -6,65 +6,47 @@ let tags = {
 
 let filteredRecipes = recipes;
 
-function displayApplianceList(appliances) {
-    const containerListAppliance = document.querySelector('.appliance');
-    clearList(containerListAppliance, '.item-appliance');
+let itemsList = {
+    appliances: recipes.map(recipe => recipe.appliance),
+    ingredients: recipes.map(recipe => recipe.ingredients.map(ingredient => ingredient)),
+    ustensils: recipes.map(recipe => recipe.ustensils)
+};
 
-    for (let appliance of appliances) {
-        let newApplianceElmt = document.createElement('li');
-        newApplianceElmt.textContent = appliance;
-        newApplianceElmt.classList.add('dropdown-item', 'item-appliance');
-        containerListAppliance.appendChild(newApplianceElmt);
-
-
-        newApplianceElmt.addEventListener('click', (e) => {
-
-            let value = e.target.innerText;
-            //afficher celle ci dans un p
-            let div = document.createElement('div');
-            div.classList.add('tag-appliance');
-
-            let pElement = document.createElement('p');
-            pElement.textContent = value;
-
-            let btn = document.createElement('button');
-            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
-
-            div.appendChild(pElement);
-            div.appendChild(btn);
-
-            let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(div);
-
-            btn.addEventListener('click', closeTag);
-
-            tags.appliances.add(value);
-
-
-            filteredRecipes = recipes;
-
-            getIngredient();
-            getAppliance();
-            getUstensil();
-
-            showRecipes(filteredRecipes);
-            displayTotalRecipes(filteredRecipes);
-
-
-
-            const ingredients = normalizeIngredients(filteredRecipes);
-            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
-
-            const ustensils = normalizeUstensils(filteredRecipes);
-            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
-
-            const appliances = normalizeAppliances(filteredRecipes);
-            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
-        })
-    }
+function displayList(items, container, itemClassName, tagClass, tagType) {
+    const containerElement = document.querySelector(container);
+    clearList(containerElement, itemClassName);
+    addListItem(containerElement, items, itemClassName, tagClass, tagType);
 }
 
-function normalizeAppliances(recipes, value = "") {
+function displayApplianceList(appliances) {
+    displayList(appliances, '.appliance', 'item-appliance', 'tag-appliance', 'appliances');
+
+}
+
+function displayUstensilsList(ustensils) {
+    displayList(ustensils, '.ustensils', 'item-ustensil', 'tag-ustensil', 'ustensils');
+}
+
+function displayIngredientsList(ingredients) {
+    displayList(ingredients, '.ingredients', 'item-ingredient', 'tag-ingredient', 'ingredients');
+}
+
+function normalizeItem(value = "", getItem) {
+    let items = [];
+    for (let recipe of filteredRecipes) {
+        let recipeItems = getItem(recipe);
+        for (let item of recipeItems) {
+            if(!items.includes(item.toLowerCase()) && item.toLowerCase().includes(value)) {
+                items.push(item.toLowerCase())
+            }
+        }
+    }
+    return items;
+}
+
+
+
+function normalizeAppliances(value = "") {
     let appliances = [];
     for (let recipe of recipes) {
         if (!appliances.includes(recipe.appliance.toLowerCase()) && recipe.appliance.toLowerCase().includes(value)) {
@@ -72,6 +54,7 @@ function normalizeAppliances(recipes, value = "") {
         }
     }
     return appliances;
+    //return normalizeItem(recipes, value, getAppliance);
 }
 
 function normalizeUstensils(recipes, value = "") {
@@ -96,123 +79,6 @@ function normalizeIngredients(recipes, value = "") {
         }
     }
     return ingredients;
-}
-
-function displayUstensilsList(ustensils) {
-    const containerListUstensils = document.querySelector('.ustensils');
-    clearList(containerListUstensils, '.item-ustensil');
-
-    for (ustensil of ustensils) {
-
-        let newUstensilElmt = document.createElement('li');
-        newUstensilElmt.textContent = ustensil;
-        newUstensilElmt.classList.add('dropdown-item', 'item-ustensil');
-        containerListUstensils.appendChild(newUstensilElmt);
-
-        newUstensilElmt.addEventListener('click', (e) => {
-
-            let value = e.target.innerText;
-
-            let div = document.createElement('div');
-            div.classList.add('tag-ustensil');
-
-            let pElement = document.createElement('p');
-            pElement.textContent = value;
-
-            let btn = document.createElement('button');
-            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
-
-            div.appendChild(pElement);
-            div.appendChild(btn);
-
-            let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(div);
-
-            btn.addEventListener('click', closeTag);
-
-            tags.ustensils.add(value);
-
-            filteredRecipes = recipes;
-
-            getIngredient();
-            getAppliance();
-            getUstensil();
-
-            showRecipes(filteredRecipes);
-            displayTotalRecipes(filteredRecipes);
-
-            const ingredients = normalizeIngredients(filteredRecipes);
-            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
-
-            const ustensils = normalizeUstensils(filteredRecipes);
-            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
-
-            const appliances = normalizeAppliances(filteredRecipes);
-            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
-        })
-    }
-}
-
-function displayIngredientsList(ingredients) {
-    const containerListIngredients = document.querySelector('.ingredients');
-
-    let ingredientElemt = document.querySelectorAll('.ingredients .item-ingredient');
-    for (elmt of ingredientElemt) {
-        elmt.remove();
-    }
-
-    for (ingredient of ingredients) {
-
-        let newIngredientElmt = document.createElement('li');
-        newIngredientElmt.textContent = ingredient;
-        newIngredientElmt.classList.add('dropdown-item', 'item-ingredient');
-        containerListIngredients.appendChild(newIngredientElmt);
-
-        newIngredientElmt.addEventListener('click', (e) => {
-            let value = e.target.innerText;
-
-
-            let div = document.createElement('div');
-            div.classList.add('tag-ingredient');
-
-            let pElement = document.createElement('p');
-            pElement.textContent = value;
-
-            let btn = document.createElement('button');
-            btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
-
-            div.appendChild(pElement);
-            div.appendChild(btn);
-
-            let containerElement = document.querySelector('.container-tag');
-            containerElement.appendChild(div);
-
-            btn.addEventListener('click', closeTag);
-
-            tags.ingredients.add(value);
-
-            filteredRecipes = recipes;
-
-            getIngredient();
-            getAppliance();
-            getUstensil();
-
-            showRecipes(filteredRecipes);
-            displayTotalRecipes(filteredRecipes);
-
-            //je pars des recettes stocké dans mon tableau
-            //je récupere la liste des ingredients
-            //des appareils et ustensiles
-            const ingredients = normalizeIngredients(filteredRecipes);
-            displayIngredientsList(ingredients.filter((ingredient) => !Array.from(tags.ingredients).includes(ingredient)));
-
-            const ustensils = normalizeUstensils(filteredRecipes);
-            displayUstensilsList(ustensils.filter((ustensil) => !Array.from(tags.ustensils).includes(ustensil)));
-
-            const appliances = normalizeAppliances(filteredRecipes);
-            displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
-        })
-    }
 }
 
 function filterAdvencedWithValue() {
@@ -344,6 +210,57 @@ function closeTag(e) {
 
     containerTag.remove();
 
+    updateFilteredRecipes();
+}
+
+
+
+function clearList(container, item) {
+    let elements = container.querySelectorAll(item);
+    for (let elmt of elements) {
+        elmt.remove();
+    }
+}
+
+function addListItem(container, items, itemNameClass, tagNameClass, tagType) {
+    for (let item of items) {
+        let newElement = document.createElement('li');
+        newElement.textContent = item;
+        newElement.classList.add('dropdown-item', itemNameClass);
+        container.appendChild(newElement);
+
+        newElement.addEventListener('click', (e) => {
+            let value = e.target.innerText;
+            addTag(tagNameClass, value, tagType);
+        })
+    }
+}
+
+function addTag(tagNameClass, value, tagType) {
+
+    let div = document.createElement('div');
+    div.classList.add(tagNameClass);
+
+    let pElement = document.createElement('p');
+    pElement.textContent = value;
+
+    let btn = document.createElement('button');
+    btn.classList.add('close-tag', 'fa-solid', 'fa-xmark');
+
+    div.appendChild(pElement);
+    div.appendChild(btn);
+
+    let containerElement = document.querySelector('.container-tag');
+    containerElement.appendChild(div);
+
+    btn.addEventListener('click', closeTag);
+
+    tags[tagType].add(value);
+    updateFilteredRecipes();
+}
+
+function updateFilteredRecipes() {
+
     const searchValue = document.getElementById('main-search');
     filteredRecipes = getRecipes(searchValue.value);
 
@@ -367,13 +284,5 @@ function closeTag(e) {
     displayApplianceList(appliances.filter((appliance) => !Array.from(tags.appliances).includes(appliance)));
 }
 
-
-
-function clearList(container, item) {
-    let elements = container.querySelectorAll(item);
-    for (let elmt of elements) {
-        elmt.remove();
-    }
-}
 
 

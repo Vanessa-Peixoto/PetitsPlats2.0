@@ -77,10 +77,13 @@ body {
 
 .container-filter {
     display: flex;
-    
-   width: 50%;
-   background-color: #FFFFFF;
+    width: 50%;
+    justify-content: space-between;
 }
+
+
+
+
 
 .dropdown-toggle {
     font-family: 'Manrope', sans serif;
@@ -185,6 +188,24 @@ body {
     border-radius: 10px;
 }
 
+.tag-appliance {
+    position: relative;
+    background-color: var(--color-yellow);
+    font-family: var(--font-secondary);
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.tag-ustensil {
+    position: relative;
+    background-color: var(--color-yellow);
+    font-family: var(--font-secondary);
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+}
+
 .close-tag {
     position: absolute;
     top: 12px;
@@ -195,6 +216,16 @@ body {
 }
 
 .tag-ingredient p {
+    padding: 10px 0px 10px 10px;
+    text-transform: capitalize;
+}
+
+.tag-appliance p {
+    padding: 10px 0px 10px 10px;
+    text-transform: capitalize;
+}
+
+.tag-ustensil p {
     padding: 10px 0px 10px 10px;
     text-transform: capitalize;
 }

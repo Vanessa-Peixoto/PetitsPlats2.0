@@ -1,4 +1,3 @@
-
 /**
  * @description Get recipes matching the search value
  * @param {string} searchValue 
@@ -40,9 +39,9 @@ function displayRecipes(recipes, searchValue) {
         container.innerHTML = '';
         container.appendChild(message);
     } else {
-       showRecipes(recipes);
+        showRecipes(recipes);
     }
-    displayTotalRecipes(recipes); 
+    displayTotalRecipes(recipes);
 }
 
 /**
@@ -52,14 +51,13 @@ function displayRecipes(recipes, searchValue) {
 function initSearch(e) {
     let searchValue = e.target.value;
     if (searchValue.length > 3) {
-        let filteredRecipes = getRecipes(searchValue);
+        filteredRecipes = getRecipes(searchValue);
         displayRecipes(filteredRecipes, searchValue);
-        displayApplianceList(normalizeAppliances(filteredRecipes));
-        displayIngredientsList(normalizeIngredients(filteredRecipes));
-        displayUstensilsList(normalizeUstensils(filteredRecipes));
+        updateItemList();
+        displayFullList();
     }
-    else if(searchValue.length === 0) {
-        displayRecipes(recipes)
+    else if (searchValue.length === 0) {
+        displayRecipes(recipes);
     }
 }
 

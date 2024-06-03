@@ -1,5 +1,5 @@
 /**
- * @description Global variable which transform my items into object of string 
+ * @description Global variable which transform my items into array of string
  */
 let itemsList = {
     appliances: new Set(recipes.map(recipe => recipe.appliance.toLowerCase())),
@@ -15,9 +15,10 @@ let itemsList = {
 function displayList(type, list) {
     const domElement = domType[type];
     const containerElement = document.querySelector(`.${domElement.container}`);
-    //call the function clearList for remove item in the list
+    //call the function clearList for remove all item in the list
     clearList(containerElement, domElement.itemClassName);
 
+    //use the right source
     if (!list) {
         list = itemsList[type];
     }
@@ -36,7 +37,7 @@ function displayFullList() {
 }
 
 /**
- * @description Update the list of items
+ * @description Update the list of items based on filtered recipes
  * @returns {Object}
  */
 function updateItemList() {

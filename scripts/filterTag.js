@@ -55,23 +55,22 @@ function updateFromTags() {
         }
         //create variable which collect all the ingredients in my data file
         const ingredients = recipe.ingredients.map(ingredient => ingredient.ingredient.toLowerCase());
-        //thanks to intersection, we cross the selected tags with what is in the recipe
-        //
-        return tags.ingredients.intersection(new Set(ingredients)).size === tags.ingredients.size;
+        //return if every ingredients in tag are present in recipe
+        return Array.from(tags.ingredients).every((ingredient) => ingredients.includes(ingredient));
     })
         .filter((recipe) => {
             if (tags.appliances.size === 0) {
                 return true;
             }
-            const appliance = recipe.appliance.toLowerCase();
-            return tags.appliances.intersection(new Set([appliance])).size === tags.appliances.size;
+            const appliances = recipe.appliance.toLowerCase();
+            return Array.from(tags.appliances).every((appliance) => appliances.includes(appliance));
         })
         .filter((recipe) => {
             if (tags.ustensils.size === 0) {
                 return true;
             }
             const ustensils = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
-            return tags.ustensils.intersection(new Set(ustensils)).size === tags.ustensils.size;
+            return Array.from(tags.ustensils).every((ustensil) => ustensils.includes(ustensil));
         });
 }
 

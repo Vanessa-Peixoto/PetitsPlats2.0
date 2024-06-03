@@ -61,6 +61,14 @@ body {
     border: none;
 }
 
+.btn-close {
+    position: absolute;
+    top: 18px;
+    right: 66px;
+    font-size: 10px;
+    display: none;
+}
+
 .fa-magnifying-glass {
     color: #FFFFFF;
 }
@@ -73,15 +81,18 @@ body {
 .container-main {
     display: flex;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 
 .container-filter {
     display: flex;
-    width: 50%;
+    width: 55%;
     justify-content: space-between;
 }
 
-
+.dropdown {
+    width: 195px;
+}
 
 
 
@@ -96,14 +107,15 @@ body {
     justify-content: space-between;
 }
 
-#drop-menu{
-    top: -6px !important;
-    width: 200px;
+.dropdown-menu{
+    top: -10px !important;
+    width: 195px;
     border: none;
 }
 
 .search-item {
     border: 1px #C6C6C6 solid;
+    width: 100%;
 }
 
 .search-item-icon {
@@ -113,14 +125,35 @@ body {
 .btn-search-item {
     position: absolute;
     right: 20px;
+    top: 17px;
     background: none;
     border: none;
 }
 
+.dropdown-item {
+    font-family: var(--font-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-yellow);
+}
+
+.dropdown-item:hover:nth-child(1) {
+    background-color: #FFFFFF;
+}
+
+.btn.show {
+    background-color: #FFFFFF;
+}
+
+.btn:hover {
+    background-color: #FFFFFF;
+}
+
 .container-main-title {
-    flex: 1;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
 }
 
@@ -133,8 +166,9 @@ body {
 
 .card {
     width: 380px;
-    height: 730px;
+    height: 740px;
     border-radius: 21px;
+    margin-bottom: 4em;
 }
 
 .card-img-top {
@@ -148,22 +182,40 @@ body {
     font-family: 'Manrope', sans serif;
     text-transform: uppercase;
     color: var(--color-grey);
+    font-weight: bold;
+}
+
+.container-list {
+    padding: 0;
+    margin-right: 13%;
 }
 
 .card-text {
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: calc(1.2em* 4);
+    line-height: 1.2em;
 }
 
 .list-group {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 5%;
 }
 
 .list-group-item {
     padding: 0;
     border: none;
     font-family: 'Manrope', sans serif;
+}
+
+.list-group-item:nth-child(2) {
+    color: var(--color-grey);
 }
 
 .card-tag {

@@ -46,6 +46,7 @@ function recipesTemplate(data) {
 
         ingredients.forEach((ingredient) => {
             let containerListIngredient = document.createElement('ul');
+            containerListIngredient.classList.add('container-list')
             let newIngredient = document.createElement('li');
             newIngredient.textContent = ingredient.ingredient;
             newIngredient.classList.add('list-group-item');
@@ -59,7 +60,7 @@ function recipesTemplate(data) {
                     newIngredientQuantity.textContent = ingredient.quantity;
                 }
                 if (ingredient.unit) {
-                    newIngredientQuantity.textContent += ingredient.unit;
+                    newIngredientQuantity.textContent += ' ' + ingredient.unit;
                 }
                 newIngredientQuantity.classList.add('list-group-item');
             }

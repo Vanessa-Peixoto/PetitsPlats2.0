@@ -86,6 +86,7 @@ function updateFilteredRecipes() {
     //recover the recipe if tag are selected
     filteredRecipes = updateFromTags();
     
+    
     //update the list of items depending of the filtered recipes
     updateItemList();
 

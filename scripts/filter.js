@@ -51,15 +51,52 @@ function displayRecipes(recipes, searchValue) {
 function initSearch(e) {
     let searchValue = e.target.value;
     if (searchValue.length > 3) {
+        displayBtnClose();
         filteredRecipes = getRecipes(searchValue);
         displayRecipes(filteredRecipes, searchValue);
         updateItemList();
         displayFullList();
     }
     else if (searchValue.length === 0) {
-        displayRecipes(recipes);
+        resetData()
     }
+}
+/**
+ * @description Display btn close in the input
+ */
+function displayBtnClose() {
+    const btn = document.querySelector('.btn-close');
+    btn.style.display = 'block';
+}
+
+/**
+ * @description  close the btn and reset the value in the main search
+ * @param {Event} e 
+ */
+function closeBtnSearch(e) {
+    e.preventDefault();
+    const btn = document.querySelector('.btn-close');
+    btn.style.display = 'none';
+
+    const searchInputValue = document.querySelector('#main-search');
+    searchInputValue.value = '';
+
+    resetData();
+}
+
+/**
+ * @description Reset all data
+ */
+function resetData() {
+    displayRecipes(recipes);
+    filteredRecipes = recipes;
+    updateItemList();
+    displayFullList();
 }
 
 const searchInput = document.getElementById('main-search');
 searchInput.addEventListener('input', initSearch);
+
+const btn = document.querySelector('.btn-close');
+btn.addEventListener('click', closeBtnSearch);
+

@@ -4,25 +4,13 @@
  * @returns {Array<Object>}
  */
 function getRecipes(searchValue) {
-    //create new array which contains recipes
-    let newRecipesArray = [];
-    //loop the recipes object
-    for (recipe of recipes) {
-        //compare the search value with the recipes
-        if (recipe.name.includes(searchValue) || recipe.description.includes(searchValue)) {
-            //add new recipe
-            newRecipesArray.push(recipe);
-            continue;
-        }
-        //compare the ingredients of recipes
-        for (ingredient of recipe.ingredients) {
-            if (ingredient.ingredient.includes(searchValue)) {
-                newRecipesArray.push(recipe);
-                break;
-            }
-        }
-    }
-    return newRecipesArray;
+    return recipes.filter(recipe => 
+        //verify if name/description/ingredient is include in the search
+        recipe.name.includes(searchValue) || 
+        recipe.description.includes(searchValue) || 
+        //some verify if one ingredient is inlude in the recipe
+        recipe.ingredients.some(ingredient => ingredient.ingredient.includes(searchValue))
+    );
 }
 /**
  * @description Show the recipes in the section

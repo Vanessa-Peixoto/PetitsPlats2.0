@@ -7,23 +7,24 @@ function getRecipes(searchValue) {
     //create new array which contains recipes
     let newRecipesArray = [];
     //loop the recipes object
-    for (recipe of recipes) {
+    for (let i = 0; i<recipes.length; i++) {
         //compare the search value with the recipes
-        if (recipe.name.includes(searchValue) || recipe.description.includes(searchValue)) {
+        if (recipes[i].name.includes(searchValue) || recipes[i].description.includes(searchValue)) {
             //add new recipe
-            newRecipesArray.push(recipe);
+            newRecipesArray.push(recipes[i]);
             continue;
         }
         //compare the ingredients of recipes
-        for (ingredient of recipe.ingredients) {
-            if (ingredient.ingredient.includes(searchValue)) {
-                newRecipesArray.push(recipe);
+        for (let j = 0; j<recipes[i].ingredients.length; j++) {
+            if (recipes[i].ingredients[j].ingredient.includes(searchValue)) {
+                newRecipesArray.push(recipes[i]);
                 break;
             }
         }
     }
     return newRecipesArray;
 }
+
 /**
  * @description Show the recipes in the section
  * @param {Array<Object>} recipes 
@@ -50,7 +51,7 @@ function displayRecipes(recipes, searchValue) {
  */
 function initSearch(e) {
     let searchValue = e.target.value;
-    if (searchValue.length > 3) {
+    if (searchValue.length >= 3) {
         displayBtnClose();
         filteredRecipes = getRecipes(searchValue);
         displayRecipes(filteredRecipes, searchValue);

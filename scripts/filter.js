@@ -61,6 +61,7 @@ function initSearch(e) {
         resetData()
     }
 }
+
 /**
  * @description Display btn close in the input
  */

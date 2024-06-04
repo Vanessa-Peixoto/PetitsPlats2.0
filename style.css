@@ -69,6 +69,17 @@ body {
     display: none;
 }
 
+.btn-close-item {
+    position: absolute;
+    font-size: 10px;
+    top: 19px;
+    right: 47px;
+    border: none;
+    background: none;
+    color: var(--color-grey);
+    display: none;
+}
+
 .fa-magnifying-glass {
     color: #FFFFFF;
 }
@@ -114,12 +125,14 @@ body {
 }
 
 .search-item {
-    border: 1px #C6C6C6 solid;
+    border: 1px var(--color-grey) solid;
     width: 100%;
+    color: var(--color-grey);
+
 }
 
 .search-item-icon {
-    color: #C6C6C6;
+    color: var(--color-grey);
 }
 
 .btn-search-item {

@@ -68,6 +68,7 @@ function filterAdvencedWithValue() {
             if (searchModel === 'search-ingredient') {
                 displayList('ingredients', filterListFromSearch('ingredients', value))
             }
+            displayBtnCloseItem(e.target)
         })
     }
 }
@@ -85,8 +86,8 @@ function updateFilteredRecipes() {
 
     //recover the recipe if tag are selected
     filteredRecipes = updateFromTags();
-    
-    
+
+
     //update the list of items depending of the filtered recipes
     updateItemList();
 
@@ -96,4 +97,36 @@ function updateFilteredRecipes() {
 
     //display the list of items available in recipes
     displayFullList();
+}
+
+/**
+ * @description Display btn close in the input
+ */
+function displayBtnCloseItem(input) {
+    const btn = input.nextElementSibling;
+    if (btn && btn.classList.contains('btn-close-item')) {
+        btn.style.display = 'block';
+    }
+}
+
+/**
+ * @description  close the btn and reset the value in the main search
+ * @param {Event} e 
+ */
+function closeBtnSearchItem(e) {
+    e.preventDefault();
+    const btn = e.target
+    btn.style.display = 'none';
+
+    const searchInputValue = btn.previousElementSibling;
+    if (searchInputValue && searchInputValue.classList.contains('search-item')) {
+        searchInputValue.value = '';
+    }
+
+    displayFullList();
+}
+
+const btnItem = document.querySelectorAll('.btn-close-item');
+for(let btn of btnItem) {
+    btn.addEventListener('click', closeBtnSearchItem);
 }

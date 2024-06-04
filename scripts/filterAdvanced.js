@@ -68,7 +68,7 @@ function filterAdvencedWithValue() {
             if (searchModel === 'search-ingredient') {
                 displayList('ingredients', filterListFromSearch('ingredients', value))
             }
-            displayBtnCloseItem(e.target)
+            displayBtnCloseItem(e.target);
         })
     }
 }
@@ -101,6 +101,7 @@ function updateFilteredRecipes() {
 
 /**
  * @description Display btn close in the input
+ * @param {HTMLElement} input
  */
 function displayBtnCloseItem(input) {
     const btn = input.nextElementSibling;
@@ -115,14 +116,13 @@ function displayBtnCloseItem(input) {
  */
 function closeBtnSearchItem(e) {
     e.preventDefault();
-    const btn = e.target
+    const btn = e.target;
     btn.style.display = 'none';
 
     const searchInputValue = btn.previousElementSibling;
     if (searchInputValue && searchInputValue.classList.contains('search-item')) {
         searchInputValue.value = '';
     }
-
     displayFullList();
 }
 

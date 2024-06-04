@@ -6,7 +6,7 @@
 function recipesTemplate(data) {
 
     const { id, image, name, ingredients, time, description } = data;
-    const picture = `images/${image}`;
+    const picture = `assets/images/${image}`;
 
     function createCardRecipe() {
         //create article

@@ -13,7 +13,7 @@ body {
 }
 
 .container-header {
-    background-image: url(background.jpg);
+    background-image: url(../images/background.jpg);
     height: 660px;
 }
 .logo {

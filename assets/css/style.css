@@ -1,6 +1,5 @@
-body {
-    font-family: 'Anton', sans serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"');
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@200..800&display=swap");
 
 :root {
     --color-yellow : #FFD15B;
@@ -12,10 +11,16 @@ body {
     --font-secondary: 'Manrope', sans serif;
 }
 
+body {
+    font-family: var(--font-primary);
+}
+
+    /** Header **/
 .container-header {
     background-image: url(../images/background.jpg);
     height: 660px;
 }
+
 .logo {
     width: 15%;
     margin-top: 3em;
@@ -33,7 +38,7 @@ body {
     padding: 0 10em 0 10em;
     line-height: 1.5em;
 }
-
+        /** Input main search **/
 .container-search {
     width: 900px;
     position: relative;
@@ -45,7 +50,7 @@ body {
     height: 50px;
     border-radius: 11px;
     border: none;
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
     color: var(--color-grey);
     padding: 20px;
 }
@@ -69,20 +74,11 @@ body {
     display: none;
 }
 
-.btn-close-item {
-    position: absolute;
-    font-size: 10px;
-    top: 19px;
-    right: 47px;
-    border: none;
-    background: none;
-    color: var(--color-grey);
-    display: none;
-}
-
 .fa-magnifying-glass {
     color: #FFFFFF;
 }
+
+    /** Main **/
 
 .main {
     padding: 40px;
@@ -101,14 +97,19 @@ body {
     justify-content: space-between;
 }
 
+.container-main-title {
+    display: flex;
+    align-items: center;
+}
+
+        /** Container Filter Advenced **/
+
 .dropdown {
     width: 195px;
 }
 
-
-
 .dropdown-toggle {
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
     border: none;
     background-color: #FFFFFF;
     padding: 17px 16px 17px 16px;
@@ -128,7 +129,6 @@ body {
     border: 1px var(--color-grey) solid;
     width: 100%;
     color: var(--color-grey);
-
 }
 
 .search-item-icon {
@@ -141,6 +141,17 @@ body {
     top: 17px;
     background: none;
     border: none;
+}
+
+.btn-close-item {
+    position: absolute;
+    font-size: 10px;
+    top: 19px;
+    right: 47px;
+    border: none;
+    background: none;
+    color: var(--color-grey);
+    display: none;
 }
 
 .dropdown-item {
@@ -165,10 +176,7 @@ body {
     background-color: #FFFFFF;
 }
 
-.container-main-title {
-    display: flex;
-    align-items: center;
-}
+        /** Card Recipe **/
 
 .container-card {
     display: flex;
@@ -192,7 +200,7 @@ body {
 
 .card-subtitle {
     margin-top: 2em;
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
     text-transform: uppercase;
     color: var(--color-grey);
     font-weight: bold;
@@ -224,12 +232,14 @@ body {
 .list-group-item {
     padding: 0;
     border: none;
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
 }
 
 .list-group-item:nth-child(2) {
     color: var(--color-grey);
 }
+
+        /** Tag **/
 
 .card-tag {
     position: absolute;
@@ -238,31 +248,13 @@ body {
     border-radius: 14px;
     background-color: var(--color-yellow);
     padding: 5px 15px 5px 15px;
-    font-family: 'Manrope', sans serif;
+    font-family: var(--font-secondary);
     font-size: 12px;
     text-align: center;
     width: 65px;
 }
 
-.tag-ingredient {
-    position: relative;
-    background-color: var(--color-yellow);
-    font-family: var(--font-secondary);
-    width: 200px;
-    height: 50px;
-    border-radius: 10px;
-}
-
-.tag-appliance {
-    position: relative;
-    background-color: var(--color-yellow);
-    font-family: var(--font-secondary);
-    width: 200px;
-    height: 50px;
-    border-radius: 10px;
-}
-
-.tag-ustensil {
+.tag-ingredient, .tag-appliance, .tag-ustensil {
     position: relative;
     background-color: var(--color-yellow);
     font-family: var(--font-secondary);
@@ -280,17 +272,7 @@ body {
     font-size: 20px;
 }
 
-.tag-ingredient p {
-    padding: 10px 0px 10px 10px;
-    text-transform: capitalize;
-}
-
-.tag-appliance p {
-    padding: 10px 0px 10px 10px;
-    text-transform: capitalize;
-}
-
-.tag-ustensil p {
+.tag-ingredient p, .tag-appliance p, .tag-ustensil p {
     padding: 10px 0px 10px 10px;
     text-transform: capitalize;
 }

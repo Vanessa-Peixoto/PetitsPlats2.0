@@ -127,6 +127,6 @@ function closeBtnSearchItem(e) {
 }
 
 const btnItem = document.querySelectorAll('.btn-close-item');
-for(let btn of btnItem) {
+for (let btn of btnItem) {
     btn.addEventListener('click', closeBtnSearchItem);
 }

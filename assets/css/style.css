@@ -122,6 +122,8 @@ body {
     top: -10px !important;
     width: 195px;
     border: none;
+    overflow-y: scroll;
+    height: 200px;
 }
 
 .search-item {
